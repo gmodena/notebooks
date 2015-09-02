@@ -3,7 +3,6 @@ title: "Bobo the amoeba"
 output: html_document
 ---
 
-
 ## Problem statement
 *Bobo the amoeba has a 25%, 25%, and 50% chance of producing 0, 1, or 2 offspring, respectively. Each of Bobo’s descendants also have the same probabilities. What is the probability that Bobo’s lineage dies out?*
 
@@ -14,10 +13,10 @@ For $i$ in ${0,1,2}$ let $A_i$ be a r.v. describing the event that Bobo turns in
 
  1. $P(X|A_0) = 1$; Bobo dies without an offspring
  2. $P(X|A_1) = P(X)$; Bobo has one offspring, which will retain its reproduction probabilities
- 3. $P(A|X_2) = P(X)^2$; Bobo has two offsprings. Both will retain its reproduction probabilities
+ 3. $P(A|X_2) = P(X)^2$; Bobo has two offspring. Both will retain its reproduction probabilities
 
 By the law of total probability we can now write $P(X)$ as 
-$$P(X) = \frac{1}{4} P(X|A_0) + \frac{1}{4} P(X|A_1) + \frac{1}{4} P(X|A_2)$$
+$$P(X) = \frac{1}{4} P(X|A_0) + \frac{1}{4} P(X|A_1) + \frac{1}{2} P(X|A_2)$$
 
 by doing simple algebra we reduce the equation to
 $0 = \frac{1}{4}  + P(X) (-\frac{3}{4}  + \frac{1}{2} P(X))$
@@ -67,16 +66,15 @@ offspring <- function(v) {
 
 To convince ourselves that the multinomial simulation works, let's plot the frequency of each offspring over a few thousand iterations.
 ```{r}
-t <- c(offspring(p))
-for (i in 1:10000) {
-  t <- c(t, offspring(p))
-}
+t <- replicate(10000, offspring(p))
 
 df <- as.data.frame(t)
 colnames(df) <- c("outcomes")
-ggplot(data=df, aes(x=as.factor(outcomes))) + geom_histogram() + xlab("outcomes")
+ggplot(data=df, aes(x=as.factor(outcomes))) + 
+  geom_histogram() +
+  xlab("outcomes") + 
+  ggtitle("Number of offspring")
 ```
-
 
 ### Simulation runs
 ```{r}
