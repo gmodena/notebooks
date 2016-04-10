@@ -11,7 +11,7 @@ output: html_document
 Let $X$ be a random variable describe the event "the population eventually dies out". We are asked to find $P(X)$.
 For $i$ in ${0,1,2}$ let $A_i$ be a r.v. describing the event that Bobo turns into $i$ amoebas. It follows that
 
- 1. $P(X|A_0) = 1$; Bobo dies without an offspring
+ 1. $P(X|A_0) = 1$; Bobo dies without an inins  
  2. $P(X|A_1) = P(X)$; Bobo has one offspring, which will retain its reproduction probabilities
  3. $P(A|X_2) = P(X)^2$; Bobo has two offspring. Both will retain its reproduction probabilities
 
